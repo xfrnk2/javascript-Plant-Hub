@@ -12,7 +12,7 @@ function playWowVoice () {
 
 function playOneCommitVoice () {
     let myAudio = new Audio(); // Aduio 객체 생성
-    let playList = ["help_me_voice.mp3", "./assets/one_day_one_commit.mp3"]
+    let playList = ["./assets/help_me_voice.mp3", "./assets/one_day_one_commit.mp3"]
     
     myAudio.src = "./assets/one_day_one_commit.mp3";
     myAudio.play();
@@ -20,7 +20,7 @@ function playOneCommitVoice () {
     setInterval(() => {
         myAudio.src = playList[Math.round(Math.random())]; // 음원 파일 설정
         myAudio.play();
-    }, 25000);
+    }, 15000);
     
 }
 
@@ -140,10 +140,10 @@ function useSkillrainFall() {
 
 }
 function setSkillMagicHand() {
-    if (4000 > resource) {
+    if (3200 > resource) {
         return;
     }
-    resource -= 4000;
+    resource -= 3200;
     playWowVoice();
     
     for (let i = 0; i < arr.length; i ++) {
