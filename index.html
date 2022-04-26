@@ -1,8 +1,8 @@
 <html>
     <head>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="./index.css">
-        <link rel="stylesheet" type="text/css" href="./jquery-sakura.css">
+        <link rel="stylesheet" type="text/css" href="index.css">
+        <link rel="stylesheet" type="text/css" href="jquery-sakura.css">
         <style>
             rect {
                 fill: #ebedf0;
@@ -20,7 +20,7 @@
         <div id="timeCountSeconds" style="text-align:left"> 0.0<br>Sec</div>
         <button id = "timeCountStartBtn" style="width: 50px; height: 50px;">게임 시작</button>
     </div>
-    <div style="position: absolute; margin: 10vh 10vw"><ul>
+    <div style="position: absolute; margin: 10vh 10vw; pointer-events: none; "><ul>
     </ul>
     <h3>달성한 미션 목록</h3>
     <div id="completedMissionList">
@@ -28,7 +28,7 @@
     </ul>
 </div>
 </div>
-<div style="position: absolute; margin-left: 80vw; margin-top: 10vh; z-index:999">
+<div style="position: absolute; margin-left: 80vw; margin-top: 10vh; z-index:999; pointer-events: none; ">
 <h3>돈주고 쓰는 스킬</h3>
     <ul id="skillList">
         <button id="rainFall">비내리기(2000원 필요)</button>
