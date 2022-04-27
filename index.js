@@ -10,6 +10,11 @@ function playDogSound() {
     const dogAudio = new Audio();
     dogAudio.src = "./assets/dog_sound.mp3";
     dogAudio.play();
+    let innerContent = document.querySelector("#doggiExplanation");
+    innerContent.style.color = "red";
+    setTimeout (() => {
+        innerContent.style.color = "blue";
+    }, 2000)
 }
 
 function playOneCommitVoice() {
@@ -73,7 +78,7 @@ function startGame() {
     for (let i = 0; i < arr.length; i++) {
         arr[i].addEventListener("click", (e) => updateBlock(e, i))
     }
-    centerImage.innerHTML = `<img src="./assets/sibainu.gif" style=""> <img src="./assets/sibainu.gif" style=""> <img src="./assets/sibainu.gif" style=""> <img src="./assets/sibainu.gif" style=""><br><span style="text-align:center">　  bark when touched</span>`;
+    centerImage.innerHTML = `<img src="./assets/sibainu.gif" style=""> <img src="./assets/sibainu.gif" style=""> <img src="./assets/sibainu.gif" style=""> <img src="./assets/sibainu.gif" style=""><br><span id="doggiExplanation" style="text-align:center; color:blue; font-weight:bold">　  bark when touched</span>`;
 
     const backgroundAudio = new Audio();
     backgroundAudio.src = "./assets/background-music.mp3";
@@ -89,7 +94,7 @@ function startGame() {
 
     setInterval(() => {
         resource += 21;
-        timeCount.innerHTML = `<div style="width: 220px; height: 50px; font-size: x-large">플레이 시간: ${((Date.now() - prevTime) / 1000).toFixed(1)}초 <br> <br> 유효한 자원: ${resource}원</div>`;
+        timeCount.innerHTML = `<div style="width: 220px; height: 50px; font-size: x-large">플레이 시간: ${parseInt((Date.now() - prevTime) / 1000)}초 <br> <br> 유효 자원: ${resource}원</div>`;
         let currentPlayTime = Math.round((Date.now() - prevTime) / 1000);
         if (currentPlayTime > timeMissionList[i] - 1 && i < timeMissionList.length) {
             ML.innerHTML = ML.innerHTML + `<li>총 플레이 시간 ${currentPlayTime}초 달성!</li>`;
