@@ -1,33 +1,33 @@
 
 
 function playWowVoice() {
-    const myAudio = new Audio(); // Aduio 객체 생성
-    myAudio.src = "./assets/eddy_wally_wow_count1.mp3"; // 음원 파일 설정
+    const myAudio = new Audio();
+    myAudio.src = "./assets/eddy_wally_wow_count1.mp3";
     myAudio.play();
 }
 
 function playDogSound() {
-    const dogAudio = new Audio(); // Aduio 객체 생성
-    dogAudio.src = "./assets/dog_sound.mp3"; // 음원 파일 설정
+    const dogAudio = new Audio();
+    dogAudio.src = "./assets/dog_sound.mp3";
     dogAudio.play();
 }
 
 function playOneCommitVoice() {
-    let myAudio = new Audio(); // Aduio 객체 생성
+    let myAudio = new Audio();
     let playList = ["./assets/help_me_voice.mp3", "./assets/one_day_one_commit.mp3"]
 
     myAudio.src = "./assets/one_day_one_commit.mp3";
     myAudio.play();
 
     setInterval(() => {
-        myAudio.src = playList[Math.round(Math.random())]; // 음원 파일 설정
+        myAudio.src = playList[Math.round(Math.random())];
         myAudio.play();
     }, 15000);
 
 }
 
 function updateBlock(e, i) {
-    //e.target.dataset.level
+
     let level = e.target.dataset.level;
 
     if (4 > level) {
@@ -46,7 +46,7 @@ function updateBlock(e, i) {
 
     e.target.style.fill = colors[level];
     e.target.dataset.level = level;
-    // console.log(e.target.dataset.level)
+
 }
 
 
@@ -75,8 +75,8 @@ function startGame() {
     }
     centerImage.innerHTML = `<img src="./assets/sibainu.gif" style=""> <img src="./assets/sibainu.gif" style=""> <img src="./assets/sibainu.gif" style=""> <img src="./assets/sibainu.gif" style=""><br><span style="text-align:center">　  bark when touched</span>`;
 
-    const backgroundAudio = new Audio(); // Aduio 객체 생성
-    backgroundAudio.src = "./assets/background-music.mp3"; // 음원 파일 설정
+    const backgroundAudio = new Audio();
+    backgroundAudio.src = "./assets/background-music.mp3";
     backgroundAudio.play();
     backgroundAudio.autoplay = true;
     backgroundAudio.loop = true;

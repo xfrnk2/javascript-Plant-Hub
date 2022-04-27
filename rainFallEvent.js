@@ -2,7 +2,7 @@
 const canvas = document.querySelector('.canvas');
 const context = canvas.getContext('2d');
 const drops = [];
-let selectedBox; // 클릭된 box를 넣어놓은 변수
+let selectedBox;
 
 context.font = 'bold 30px sans-serif';
 
@@ -42,9 +42,7 @@ function render() {
     drop.draw();
   });
 
-  requestAnimationFrame(render); //반복
-  //console.log(drops);
-}
+  requestAnimationFrame(render);
 
 let tempX, tempY, tempSpeed, tempLength;
 for (let i = 0; i < 200; i++) {
