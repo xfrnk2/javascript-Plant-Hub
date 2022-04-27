@@ -54,13 +54,11 @@ function updateBlock(e, i) {
 function rainEvent() {
     let i = 0;
 
-    while (i < arr.length) {
-        level = arr[i].dataset.level + 1
-        if (4 > level) {
-            level++;
-        }
 
-        arr[i].style.fill = colors[parseInt(Math.random() * 4)];
+    while (i < arr.length) {
+        let level = parseInt(Math.random() * 4);
+
+        arr[i].style.fill = colors[level];
         arr[i].dataset.level = level;
 
 
@@ -165,7 +163,7 @@ function setSkillMagicHand() {
 
 function useSkillMagicHand(e) {
     let level = e.target.dataset.level;
-    e.target.style.fill = colors[parseInt(3 + Math.random() * 2)];
+    e.target.style.fill = colors[4];
     e.target.dataset.level = level;
 }
 
