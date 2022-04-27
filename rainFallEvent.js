@@ -14,7 +14,7 @@ class Drop {
     this.speed = speed;
     this.length = length;
     this.draw();
-     }
+  }
 
   draw() {
     context.beginPath();
@@ -23,36 +23,36 @@ class Drop {
     context.lineTo(this.x, this.y + this.length);
     context.stroke();
     context.closePath();
-    
+
   }
 }
 
- function render() {
-   context.clearRect(0, 0, canvas.width, canvas.height);
+function render() {
+  context.clearRect(0, 0, canvas.width, canvas.height);
 
-   drops.forEach((drop) => {
-     drop.y += drop.speed;
-     if (drop.y > canvas.height) {
-       drop.y = 0;
-       drop.x = Math.random() * canvas.width;
-       drop.speed = Math.random() * 3 + 1;
-       drop.length = Math.random() * 5 + 2;
-     }
+  drops.forEach((drop) => {
+    drop.y += drop.speed;
+    if (drop.y > canvas.height) {
+      drop.y = 0;
+      drop.x = Math.random() * canvas.width;
+      drop.speed = Math.random() * 3 + 1;
+      drop.length = Math.random() * 5 + 2;
+    }
 
-     drop.draw();
-   });
-   
-   requestAnimationFrame(render); //반복
-   //console.log(drops);
- }
+    drop.draw();
+  });
 
- let tempX, tempY, tempSpeed, tempLength;
- for (let i = 0; i < 200; i++) {
-   tempX = Math.random() * canvas.width;
-   tempY = Math.random() * canvas.height;
-   tempSpeed = Math.random() * 3 + 1;
-   tempLength = Math.random() * 5 + 2;
+  requestAnimationFrame(render); //반복
+  //console.log(drops);
+}
 
-   drops.push(new Drop(i, tempX, tempY, tempSpeed, tempLength));
- }
- render();
+let tempX, tempY, tempSpeed, tempLength;
+for (let i = 0; i < 200; i++) {
+  tempX = Math.random() * canvas.width;
+  tempY = Math.random() * canvas.height;
+  tempSpeed = Math.random() * 3 + 1;
+  tempLength = Math.random() * 5 + 2;
+
+  drops.push(new Drop(i, tempX, tempY, tempSpeed, tempLength));
+}
+render();

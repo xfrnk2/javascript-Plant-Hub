@@ -1,25 +1,21 @@
-const arr = document.getElementsByClassName("ContributionCalendar-day");
-const skillRainFall = document.querySelector("#rainFall");
-const colors = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
-let isVerticalLineFilledMissionSuccessed = false;
-skillRainFall.addEventListener("click", useSkillrainFall);
 
-function playWowVoice () {
+
+function playWowVoice() {
     const myAudio = new Audio(); // Aduio 객체 생성
     myAudio.src = "./assets/eddy_wally_wow_count1.mp3"; // 음원 파일 설정
     myAudio.play();
 }
 
-function playDogSound () {
+function playDogSound() {
     const dogAudio = new Audio(); // Aduio 객체 생성
     dogAudio.src = "./assets/dog_sound.mp3"; // 음원 파일 설정
     dogAudio.play();
 }
 
-function playOneCommitVoice () {
+function playOneCommitVoice() {
     let myAudio = new Audio(); // Aduio 객체 생성
     let playList = ["./assets/help_me_voice.mp3", "./assets/one_day_one_commit.mp3"]
-    
+
     myAudio.src = "./assets/one_day_one_commit.mp3";
     myAudio.play();
 
@@ -27,27 +23,27 @@ function playOneCommitVoice () {
         myAudio.src = playList[Math.round(Math.random())]; // 음원 파일 설정
         myAudio.play();
     }, 15000);
-    
+
 }
 
-function updateBlock (e, i) {
+function updateBlock(e, i) {
     //e.target.dataset.level
     let level = e.target.dataset.level;
-   
+
     if (4 > level) {
-        level ++;
+        level++;
     }
-    
+
     if (!isVerticalLineFilledMissionSuccessed) {
-    if (checkIsoneVerticalLineFilled(i)){
-        const ML = document.querySelector("#completedMissionList");
-        ML.innerHTML = ML.innerHTML + `<li>힘세고 건강한 잔디 세로줄 채우기 (+7)</li>`;
-        playWowVoice();
+        if (checkIsoneVerticalLineFilled(i)) {
+            const ML = document.querySelector("#completedMissionList");
+            ML.innerHTML = ML.innerHTML + `<li>힘세고 건강한 잔디 세로줄 채우기 (+7)</li>`;
+            playWowVoice();
 
 
-        isVerticalLineFilledMissionSuccessed = true;
+            isVerticalLineFilledMissionSuccessed = true;
+        }
     }
-}
 
     e.target.style.fill = colors[level];
     e.target.dataset.level = level;
@@ -55,54 +51,45 @@ function updateBlock (e, i) {
 }
 
 
-function rainEvent () {
-	let i = 0;
+function rainEvent() {
+    let i = 0;
 
-	while (i < arr.length) {
-    level = arr[i].dataset.level + 1
-	if (4 > level) {
-        level ++;
+    while (i < arr.length) {
+        level = arr[i].dataset.level + 1
+        if (4 > level) {
+            level++;
+        }
+
+        arr[i].style.fill = colors[parseInt(Math.random() * 4)];
+        arr[i].dataset.level = level;
+
+
+        i += Math.floor(1 + Math.random() * 7);
     }
-
-    arr[i].style.fill = colors[parseInt(Math.random() * 4)];
-    arr[i].dataset.level = level;    
-
-    
-	i += Math.floor(1 + Math.random() * 7);
-}
 }
 
 
 
 
-const timeCount = document.querySelector("#timeCount");
-const timeCountStartBtn = document.querySelector("#timeCountStartBtn");
-const resourceStatus = document.querySelector("#resourceStatus");
-const centerImage = document.querySelector("#centerImage");
-	centerImage.addEventListener("click", playDogSound);
-const prevTime = Date.now();
-let resource = 0;
+function startGame() {
+
+    for (let i = 0; i < arr.length; i++) {
+        arr[i].addEventListener("click", (e) => updateBlock(e, i))
+    }
+    centerImage.innerHTML = `<img src="./assets/sibainu.gif" style=""> <img src="./assets/sibainu.gif" style=""> <img src="./assets/sibainu.gif" style=""> <img src="./assets/sibainu.gif" style=""><br><span style="text-align:center">　  bark when touched</span>`;
+
+    const backgroundAudio = new Audio(); // Aduio 객체 생성
+    backgroundAudio.src = "./assets/background-music.mp3"; // 음원 파일 설정
+    backgroundAudio.play();
+    backgroundAudio.autoplay = true;
+    backgroundAudio.loop = true;
 
 
-function startGame () {
-    
-	for (let i = 0; i < arr.length; i ++) {
-		arr[i].addEventListener("click", (e) => updateBlock(e, i))
-	}
-	centerImage.innerHTML = `<img src="./assets/sibainu.gif" style=""> <img src="./assets/sibainu.gif" style=""> <img src="./assets/sibainu.gif" style=""> <img src="./assets/sibainu.gif" style=""><br><span style="text-align:center">　  bark when touched</span>`;
 
-	const backgroundAudio = new Audio(); // Aduio 객체 생성
-	backgroundAudio.src = "./assets/background-music.mp3"; // 음원 파일 설정
-	backgroundAudio.play();
-	backgroundAudio.autoplay = true;
-	backgroundAudio.loop = true;
-	
+    const ML = document.querySelector("#completedMissionList");
 
-	
-	const ML = document.querySelector("#completedMissionList");
-    
-    setTimeout(() => {playOneCommitVoice();}, 5000);
-    
+    setTimeout(() => { playOneCommitVoice(); }, 5000);
+
     let i = 0;
     let timeMissionList = [22, 44, 88, 120, 300, 500]
 
@@ -112,23 +99,21 @@ function startGame () {
         let currentPlayTime = Math.round((Date.now() - prevTime) / 1000);
         if (currentPlayTime > timeMissionList[i] - 1 && i < timeMissionList.length) {
             ML.innerHTML = ML.innerHTML + `<li>총 플레이 시간 ${currentPlayTime}초 달성!</li>`;
-            i ++;
+            i++;
         }
     }, 100);
-    
+
 }
 
 
 
-timeCountStartBtn.addEventListener("click", startGame)
+
+function checkIsoneVerticalLineFilled(i) {
 
 
-function checkIsoneVerticalLineFilled (i) {
-
- 
-    const start = parseInt(i/7)*7;
+    const start = parseInt(i / 7) * 7;
     let res = true;
-    for (let j = start; j < start + 7; j ++){
+    for (let j = start; j < start + 7; j++) {
 
         if (arr[j].style.fill !== "rgb(33, 110, 57)") {
             res = false;
@@ -147,15 +132,15 @@ function useSkillrainFall() {
     playWowVoice();
     resource.innerText = resource;
     const rainningTime = Date.now();
-    
-    document.querySelector("#rain").style.visibility='visible';
+
+    document.querySelector("#rain").style.visibility = 'visible';
     setTimeout(() => {
-        document.querySelector("#rain").style.visibility='hidden';
+        document.querySelector("#rain").style.visibility = 'hidden';
     }, 3000);
     setTimeout(() => {
         rainEvent();
     }, 1500)
-    
+
 
 }
 function setSkillMagicHand() {
@@ -164,25 +149,44 @@ function setSkillMagicHand() {
     }
     resource -= 3200;
     playWowVoice();
-    
-    for (let i = 0; i < arr.length; i ++) {
+
+    for (let i = 0; i < arr.length; i++) {
         arr[i].addEventListener("mouseover", useSkillMagicHand);
     }
- 
+
     setTimeout(() => {
-        for (let i = 0; i < arr.length; i ++) {
+        for (let i = 0; i < arr.length; i++) {
             arr[i].removeEventListener("mouseover", useSkillMagicHand);
         }
-  
+
     }, 5000);
 
 }
 
 function useSkillMagicHand(e) {
     let level = e.target.dataset.level;
-    e.target.style.fill = colors[parseInt(3+ Math.random() * 2)];
+    e.target.style.fill = colors[parseInt(3 + Math.random() * 2)];
     e.target.dataset.level = level;
 }
 
+
+const arr = document.getElementsByClassName("ContributionCalendar-day");
+const skillRainFall = document.querySelector("#rainFall");
+const colors = ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'];
+
+const prevTime = Date.now();
+const timeCount = document.querySelector("#timeCount");
+const timeCountStartBtn = document.querySelector("#timeCountStartBtn");
+const resourceStatus = document.querySelector("#resourceStatus");
+const centerImage = document.querySelector("#centerImage");
 const magicHand = document.querySelector("#magicHand");
+
+
+let isVerticalLineFilledMissionSuccessed = false;
+let resource = 0;
+
+
+centerImage.addEventListener("click", playDogSound);
+skillRainFall.addEventListener("click", useSkillrainFall);
+timeCountStartBtn.addEventListener("click", startGame)
 magicHand.addEventListener("click", setSkillMagicHand);
