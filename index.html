@@ -1,14 +1,18 @@
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+           integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+  </script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
         <style>
 		
             rect {
                 fill: #ebedf0;
             }
             #timeCount {
-                margin: 20vh 50vw;
+                margin: 20vh 45vw;
                 position: absolute;   
             }
 			@-webkit-keyframes fall {
@@ -826,7 +830,7 @@
 
 
 	position: absolute;
-	z-index: 999;
+	z-index: 988;
 	}
 
 	.canvas {
@@ -857,24 +861,24 @@
         <script src="jquery-sakura.js"></script>
     </head>
 <body>
-
-    <div id="timeCount" style="z-index: 999;">
-        <div id="timeCountSeconds" style="text-align:left"> 0.0<br>Sec</div>
-        <button id = "timeCountStartBtn" style="width: 50px; height: 50px;">게임 시작</button>
+<div id="centerImage" style="position:absolute; margin: 50vh 46vw; width: 15vw; z-index:999"><img src=""></div>
+    <div id="timeCount" style="z-index: 988; text-align:center;">
+        <div id="timeCountSeconds" style="text-align:center;"></div>
+        <button id = "timeCountStartBtn" style="width: 200px; height: 50px;" type ="button" class="btn btn-dark">게임 시작</button>
     </div>
-    <div style="position: absolute; margin: 10vh 10vw; pointer-events: none; "><ul>
+    <div style="position: absolute; margin: 10vh 10vw; width: 20vw; text-align: center; pointer-events: none; border: 5px solid black" ><ul>
     </ul>
     <h3>달성한 미션 목록</h3>
-    <div id="completedMissionList">
+    <div id="completedMissionList" style="text-align:left">
     
     </ul>
 </div>
 </div>
-<div style="position: absolute; margin-left: 80vw; margin-top: 10vh; z-index:999; pointer-events: none; ">
-<h3>돈주고 쓰는 스킬</h3>
-    <ul id="skillList">
-        <button id="rainFall">비내리기(2000원 필요)</button>
-        <button id="magicHand">마법의손(3200원 필요)</button>
+<div style="position: absolute; margin-left: 80vw; margin-top: 10vh; width: 15vw; height: 15vh; text-align: center; border: 5px solid black;">
+<h3 style="margin-top: 1vh">돈주고 쓰는 스킬</h3>
+    <ul id="skillList" style="z-index:999">
+        <button type="button" id="rainFall">비내리기(2000원 필요)</button>
+        <button type="button" id="magicHand">마법의손(3200원 필요)</button>
     </ul>
 </div>
 </div>
