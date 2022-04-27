@@ -174,9 +174,9 @@ function setSkillMagicHand() {
 }
 
 function useSkillMagicHand(e) {
-    let level = e.target.dataset.level;
-    e.target.style.fill = colors[4];
-    e.target.dataset.level = level;
+    const maxLevel = 4;
+    e.target.style.fill = colors[maxLevel];
+    e.target.dataset.level = maxLevel;
 }
 
 
