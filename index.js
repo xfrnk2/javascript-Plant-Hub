@@ -79,7 +79,6 @@ function startGame() {
         arr[i].addEventListener("click", (e) => updateBlock(e, i))
     }
     centerImage.innerHTML = `<img src="./assets/sibainu.gif" style=""> <img src="./assets/sibainu.gif" style=""> <img src="./assets/sibainu.gif" style=""> <img src="./assets/sibainu.gif" style=""><br><span id="doggiExplanation" style="text-align:center; color:blue; font-weight:bold">　  bark when touched</span>`;
-
     const backgroundAudio = new Audio();
     backgroundAudio.src = "./assets/background-music.mp3";
     backgroundAudio.play();
@@ -122,8 +121,20 @@ function checkIsoneVerticalLineFilled(i) {
 }
 
 
+function showEddyWowImage(delay) {
+	eddyWowImage.style.zIndex = '1000';
+	setTimeout(() => {
+		eddyWowImage.style.display = 'block';
+	}, delay)
+	setTimeout(() => {
+		eddyWowImage.style.display = 'none';
+		eddyWowImage.style.zIndex = '1';
+	}, delay + 3100)
+}
+
 function useSkillrainFall() {
     if (2000 > resource) {
+		showNotification('비내리기 스킬에 필요한 자원이 충분하지 않습니다. 2000원이 필요해요.');
         return;
     }
     if (!isRainFallAlreadySucessed) {
@@ -133,6 +144,7 @@ function useSkillrainFall() {
     resource -= 2000;
     resource.innerText = resource;
     playWowVoice();
+	showNotification("잔디가 쑥쑥 자라나는 비 내리기 스킬을 사용하셨습니다.");
 
     document.querySelector("#rain").style.visibility = 'visible';
     setTimeout(() => {
@@ -141,6 +153,7 @@ function useSkillrainFall() {
     setTimeout(() => {
         rainEvent();
     }, 1500)
+	showEddyWowImage(2100);
 
 
 }
@@ -148,11 +161,13 @@ function useSkillrainFall() {
 
 function setSkillMagicHand() {
     if (3200 > resource) {
+		showNotification('마법의손 스킬에 필요한 자원이 충분하지 않습니다. 3200원이 필요해요.');
         return;
     }
     resource -= 3200;
     resource.innerText = resource;
-    playWowVoice();
+	showNotification("손이 닿기만 하면 폭풍 성장하는 마법의 손을 사용하셨습니다.(제한시간 5초)");
+	
     if (!isMagicHandAlreadySucessed) {
         ML.innerHTML = ML.innerHTML + `<li>마법의손 사용 미션 달성!</li>`;
         isMagicHandAlreadySucessed = true;
@@ -169,7 +184,11 @@ function setSkillMagicHand() {
             arr[i].removeEventListener("mouseover", useSkillMagicHand);
         }
 
-    }, 5000);
+    }, 5300);
+	setTimeout(() => {
+		playWowVoice();
+	}, 3000)
+	showEddyWowImage(5300);
 
 }
 
@@ -179,6 +198,14 @@ function useSkillMagicHand(e) {
     e.target.dataset.level = maxLevel;
 }
 
+const showNotification = (message) => {
+  notificationContainer.classList.add('show')
+  notificationContainer.innerText = message;
+  setTimeout(() => {
+    notificationContainer.classList.remove('show')
+	notificationContainer.innerText = '';
+  }, 3400)
+}
 
 const arr = document.getElementsByClassName("ContributionCalendar-day");
 const skillRainFall = document.querySelector("#rainFall");
@@ -191,6 +218,8 @@ const resourceStatus = document.querySelector("#resourceStatus");
 const centerImage = document.querySelector("#centerImage");
 const magicHand = document.querySelector("#magicHand");
 const ML = document.querySelector("#completedMissionList");
+const eddyWowImage = document.querySelector("#eddyWowImage");
+const notificationContainer = document.querySelector("#notificationContainer");
 
 let isVerticalLineFilledMissionSuccessed = false;
 let isRainFallAlreadySucessed = false;
